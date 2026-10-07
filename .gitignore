@@ -1,0 +1,19 @@
+# Credentials and connection files: never commit these
+*.env
+.env*
+Wallet_*.zip
+wallet*/
+tnsnames.ora
+sqlnet.ora
+login.sql
+
+# Tool output
+*.log
+*.lst
+
+# OS and editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.claude/settings.local.json
