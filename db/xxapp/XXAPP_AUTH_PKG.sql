@@ -7,6 +7,11 @@
 --   Returns TRUE  -> APEX creates the session (login succeeds)
 --   Returns FALSE -> APEX rejects login (login fails)
 -- =============================================================================
+-- NOT COMPILABLE FROM THIS REPO YET. It references two things that exist only
+-- in the workspace and still have to be exported:
+--   * column PWD in XXAPP_CREDENTIALS_V (HAS_ACCESS, SAVE_CREDENTIALS)
+--   * view XXAPP_USER_INFO_V            (SAVE_CREDENTIALS)
+-- =============================================================================
 
 -- -----------------------------------------------------------------------------
 -- SPEC
@@ -24,7 +29,7 @@ CREATE OR REPLACE PACKAGE XXAPP_AUTH_PKG AS
         p_password IN VARCHAR2
     ) RETURN BOOLEAN;
 
-    procedure GET_CREDENTIALS (
+    procedure SAVE_CREDENTIALS (
         p_username IN VARCHAR2,
         p_password IN VARCHAR2
     );
@@ -116,7 +121,7 @@ CREATE OR REPLACE PACKAGE BODY XXAPP_AUTH_PKG AS
         WHERE 0 = 0
         AND IS_PRIMARY = 'Y'
         AND USERNAME = p_username
-        AND PWD = p_password
+        AND PWD = p_password;
 
         APEX_UTIL.SET_SESSION_STATE(
             P_NAME  => 'SESSION_USERNAME',
